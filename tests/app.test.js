@@ -18,9 +18,11 @@ describe("isValidTask", () => {
   it("rebutja una tasca formada només per espais", () => {
     expect(isValidTask("   ")).toBe(false);
   });
-  it("rebutja una tasca nomes formada per numeros", () => {
-    expect(isValidTask("1234")).toBe(false);
+// NUEVO TEST DE VALIDAR
+  it("rebutja una tasca amb @",()=>{
+    expect(isValidTask("Aprendre @ GitHub")).toBe(false);
   });
+  
 });
 
 describe("createTask", () => {
@@ -31,24 +33,34 @@ describe("createTask", () => {
     expect(task.completed).toBe(false);
     expect(task.id).toBeDefined();
   });
+  // NUEVA CREATE TASK
+  it("eliminar espacio",() =>{
+    expect(createTask("  Nova  ").text).toBe("Nova");
+  })
 });
 
 describe("filterTasks", () => {
   const tasks = [
     { id: 1, text: "Tasca pendent", completed: false },
-    { id: 2, text: "Tasca completada", completed: true }
+    { id: 2, text: "Tasca completada", completed: true },
+    //NUEVO FILTRO
+    {id:3,text: "1234", completed : false}
   ];
 
   it("retorna totes les tasques", () => {
-    expect(filterTasks(tasks, "all")).toHaveLength(2);
+    expect(filterTasks(tasks, "all")).toHaveLength(3);
   });
 
   it("retorna només les tasques pendents", () => {
-    expect(filterTasks(tasks, "pending")).toHaveLength(1);
+    expect(filterTasks(tasks, "pending")).toHaveLength(2);
   });
 
   it("retorna només les tasques completades", () => {
     expect(filterTasks(tasks, "completed")).toHaveLength(1);
+  });
+  // NUEVO FILTRO
+  it("retorna només les tasques que siguen solo numeros", ()=>{
+    expect(filterTasks(tasks,"number")).toHaveLength(1);
   });
 });
 
@@ -65,5 +77,9 @@ describe("getTaskStats", () => {
       pending: 2,
       completed: 1
     });
+  });2
+// NOVA TASCA CALCULAR TASCAS
+  it("calcula el total de tascas",()=>{
+    expect(getTaskStats([{completed:false},{completed:true}]).total).toBe(2);
   });
 });

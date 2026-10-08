@@ -7,7 +7,7 @@ export function createTask(text) {
     };
 }
 export function isValidTask(text) {
-  return typeof text === "string" && text.trim().length > 0;
+  return typeof text === "string" && text.trim().length > 0 && !text.includes("@");
 }
 
 export function filterTasks(tasks, filter) {
@@ -16,6 +16,9 @@ export function filterTasks(tasks, filter) {
       return tasks.filter(task => !task.completed);
     case "completed":
       return tasks.filter(task => task.completed);
+// NUEVO FILTRO
+    case "number":
+      return tasks.filter(task => !isNaN(task.text)); 
     case "all":
     default:
       return tasks;
