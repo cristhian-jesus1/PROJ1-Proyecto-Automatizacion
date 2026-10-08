@@ -86,7 +86,12 @@ taskForm.addEventListener("submit", event => {
 
   const text = taskInput.value;
 
-  if (!isValidTask(text)) {
+  if ((text.includes("@"))) {
+    formError.textContent = "La tasca no pot tenir @";
+    return;
+  }
+  if (!isValidTask(text))
+  {
     formError.textContent = "La tasca no pot estar buida.";
     return;
   }
