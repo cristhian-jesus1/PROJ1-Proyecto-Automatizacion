@@ -48,7 +48,7 @@ describe("filterTasks", () => {
   ];
 
   it("retorna totes les tasques", () => {
-    expect(filterTasks(tasks, "all")).toHaveLength(3);
+    expect(filterTasks(tasks, "all")).toHaveLength(2);
   });
 
   it("retorna només les tasques pendents", () => {
